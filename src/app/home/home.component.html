@@ -1,0 +1,36 @@
+
+<form [formGroup]="addBookForm" (ngSubmit)="onAddBookPost()">
+  <h5 *ngIf="success">Your form is valid</h5>
+
+  <label>
+    Title:
+    <input formControlName="title" required>
+    <div *ngIf="submitted && addBookForm.controls.title.errors" class="error">
+      <mat-error *ngIf="addBookForm.controls.title.errors.required">Your title is required</mat-error>
+    </div>
+  </label><br>
+
+  <label>
+    Author:
+    <input formControlName="author" required>
+    <div *ngIf="submitted && addBookForm.controls.author.errors" class="error">
+      <mat-error *ngIf="addBookForm.controls.author.errors.required">Your author is required</mat-error>
+    </div>
+  </label><br>
+
+  <label>
+    Cover:
+    <textarea formControlName="cover"></textarea>
+    <div *ngIf="submitted && addBookForm.controls.cover.errors" class="error">
+      <mat-error *ngIf="addBookForm.controls.cover.errors.required">Your cover is required</mat-error>
+    </div>
+  </label><br>
+  <input type="submit" value="Send Book" class="cta">
+</form>
+
+<ul *ngIf="books">
+  <li *ngFor="let book of books">
+    <img [src]= "book.cover">
+    <p>Title: {{ book.title }} | Author: {{ book.author }}</p>
+  </li>
+</ul>
